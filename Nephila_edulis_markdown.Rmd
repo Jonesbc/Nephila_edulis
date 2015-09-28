@@ -1,0 +1,237 @@
+---
+title: "*Nephila edulis* data analysis"
+author: "Philip Bateman (Curtin University) & Blake C Jones (University of Memphis)"
+date: "September 27, 2015"
+output: html_document
+---
+***
+***
+### **Background:**
+***
+
+*Nephila edulis* is an orb-weaver commonly found in Australia. These spiders often incorporate decaying vegetation and previously captured prey to form vertical debris trails in their webs. Previous work suggests these trails function to attract potential prey (Bjorkman-Chriswell et al. 2004). However, **we hypothesize that debris trails serve to increase a spiders crypsis during close encounters with potential predators**. This is suggested by the fact that *N. edulis* will often align its body with the debris trail when a human approaches its web. We make two predictions from our hypothesis.
+
+- **P1.** Individuals with longer debris trails will have shorter flight initiation distances (FID) when approached by a human.
+
+- **P2.** Individuals with longer debris trails are more likely to align with the debris trail rather than flee when a human approaches their web.
+
+
+***
+***
+***
+### **Data analysis:**
+***
+
+#### **Setup:**
+install the necessary packages.
+```{r, eval = FALSE}
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("car")
+```
+
+Set working directory and upload data.
+```{r, eval = FALSE}
+setwd("~/working_directory")
+DATA <- read.csv("./file_location.csv")
+```
+
+***
+#### **Testing P1: graphs**
+Let's take a look at the data graphically.
+
+```{r, echo = FALSE}
+library(ggplot2)
+setwd("~/Documents/My_Documents/Research/Research_Data/Spider_trails")
+DATA <- read.csv("./Nephila_edulis_BCJ.csv")
+ggplot(DATA, aes(x = behaviour, y = FID)) + 
+  geom_boxplot() + xlab("Behaviour") + ylab("FID(m)") +
+  ggtitle("Behaviour vs. FID") +
+  theme(axis.text.x = element_text(colour = "black", size = 14), 
+        axis.title.x = element_text(size = 18), 
+        axis.title.y = element_text(size = 18),
+        plot.title = element_text(size = 22))
+```
+
+Looks like there may be a difference in FID between the means of spiders that align and those that flee.
+
+```{r, echo = FALSE}
+ggplot(DATA, aes(y = FID, x = debris_trail_length)) + 
+  geom_point(shape=21, size=4) +
+  ylab("FID(m)") + xlab("trail length(cm)") + ggtitle("Trail Length vs. Behaviour") +
+  theme(axis.text.x = element_text(colour = "black", size = 14),
+        axis.text.y = element_text(colour = "black", size = 14),
+        axis.title.x = element_text(size = 18), 
+        axis.title.y = element_text(size = 18),
+        plot.title = element_text(size = 22))+
+  stat_smooth(method = lm, level = 0.95)
+```
+
+Doesn't look like trail length is not a good predictor of FID, but let's see what the model has to say.
+
+***
+#### **Testing P1: model**
+Run a simple linear regression model with FID as the response variable, debris trail length and spider's behaviour (align or flee) as predictor variables, and the spider's height off the ground and the approacher's start distance as covariates.   
+
+```{r, eval = FALSE}
+regression <- lm(FID ~ debris_trail_length + behaviour + 
+                   spider_height + start_distance, data = DATA)
+summary(regression)
+```
+```{r, echo = FALSE}
+regression <- lm(FID ~ debris_trail_length + behaviour + 
+                   spider_height + start_distance, data = DATA)
+summary(regression)
+```  
+
+Now, let's take a look at the confidence intervals.
+```{r, eval = FALSE}
+confint(regression, level = 0.95)
+```
+```{r, echo = FALSE}
+confint(regression, level = 0.95)
+```
+
+And now, the effect size
+```{r, eval = FALSE}
+##determine sample sizes of two groups
+table(DATA$behaviour)
+##behaviour
+pes(p = 0.00339, n.2 = 14, n.1 = 35)
+##start distance
+pes(p = .00271, n.2 = 14, n.1 = 35)
+```
+ 
+ Summary of effect size output
+ 
+ **factor**     |  **es measure**   |  **value**
+ ----------     |  --------------   |  ---------
+ behaviour      |  Cohen's d        |  0.98
+ start distance | corr. coefficient |  0.41
+
+***
+#### **Testing P1: assumptions**
+Let's make sure our model meets the assumptions of a general linear model
+
+```{r, eval = FALSE}
+##linearity and homoscedasticity
+plot(fitted(regression),residuals(regression))
+```
+```{r, echo = FALSE}
+##linearity and homoscedasticity
+plot(fitted(regression),residuals(regression))
+```
+
+There is some homoscedasticity, but it is not a lot.
+
+```{r, eval = FALSE}
+##multicollinearity
+library(car)
+vif(regression)
+detach("package:car")
+```
+```{r, echo = FALSE}
+##multicollinearity
+library(car)
+vif(regression)
+detach("package:car")
+```
+
+vif values > 4 or 5 are considered to be colinear. Our values are all just over 1, so multicollinearity is not a problem.
+
+```{r, eval = FALSE}
+qqnorm(residuals(regression))
+hist(residuals(regression))
+```
+```{r, echo = FALSE}
+qqnorm(residuals(regression))
+hist(residuals(regression))
+```
+
+The data set looks normally distributed
+
+***
+#### **Testing P1: conclusions**
+There was not a statistically significant relationship between debris trail length and FID (*p* = 0.633). However, mean FID of spiders that align vs. flee were statistically different (*p* = 0.003) This is what one would predict if spiders align their bodies to decrease their chance of being detected.
+
+There was also a statistically significant difference between start distance and FID (*p* = .003), which supports previous FID work.
+
+***
+***
+#### **Testing P2: graphs**
+Let's take a look at the data graphically.
+
+```{r, echo = FALSE}
+ggplot(DATA, aes(y = behaviour_dummy_coded, x = debris_trail_length)) + 
+  geom_point(position=position_jitter(width=0.3, height=0.06),
+              shape=21, size=4) +
+  ylab("Behaviour") + xlab("trail length(cm)") + 
+  ggtitle("Logit Regression of Trail length vs. Behaviour") +
+  theme(axis.text.x = element_text(colour = "black", size = 14),
+        axis.text.y = element_text(colour = "black", size = 14),
+        axis.title.x = element_text(size = 18), 
+        axis.title.y = element_text(size = 18),
+        plot.title = element_text(size = 22)) +
+  stat_smooth(method=glm, family=binomial)
+```
+
+```{r, echo = FALSE}
+ggplot(DATA, aes(x = behaviour, y = debris_trail_length)) + 
+  geom_boxplot() + xlab("behaviour") + ylab("trail length(cm)") +
+  ggtitle("Behaviour vs. Trail Length") +
+  theme(axis.text.x = element_text(colour = "black", size = 14), 
+        axis.title.x = element_text(size = 18), 
+        axis.title.y = element_text(size = 18),
+        plot.title = element_text(size = 22))
+```
+
+***
+#### **Testing P2: model**
+
+Run a generalized linear model to examine behaviour as the dependent variable and trail length, spider height, and web height as predictor variables.
+
+```{r, eval = FALSE}
+SpiderGLM <- glm(behaviour_dummy_coded ~ debris_trail_length + 
+                   start_distance + spider_height, data = DATA, 
+                 family = binomial(logit))
+summary(SpiderGLM)
+```
+```{r, echo = FALSE}
+SpiderGLM <- glm(behaviour_dummy_coded ~ debris_trail_length + 
+                   start_distance + spider_height, data = DATA, 
+                 family = binomial(logit))
+summary(SpiderGLM)
+```  
+
+Now, let's take a look at the confidence intervals.
+```{r, eval = FALSE}
+confint(regression, level = 0.95)
+```
+```{r, echo = FALSE}
+confint(regression, level = 0.95)
+```
+
+Since this is a logistic regression coefficients and confidence intervals are given as log odds, we can exponetiate these to get the intervals as odds-ratios.
+```{r}
+exp(cbind(odds_ratio = coef(SpiderGLM), confint(SpiderGLM)))
+```
+
+***
+#### **Testing P2: conclusions**
+There was a statistically significant difference between the means of trail length of spiders that align vs spiders that fled (*p* = 0.047). For every cm increase in debris trail length spiders are more likely to align by a factor of 1.24.
+
+Also, there was a nearly statistically significant difference between the means of start distance of spiders that aligned vs fled (*p* = .055). For every pace increase in start distance spiders were more likely to be spiders that aligned. This presents an uncontrolled bias between the two groups that. Whether this bias occurred by chance is unknown. The bias is clear in the plot below.
+
+```{r, echo = FALSE}
+ggplot(DATA, aes(x = behaviour, y = start_distance)) + 
+  geom_boxplot() + xlab("behaviour") + ylab("start distance(paces)") +
+  ggtitle("Behaviour vs. start distance") +
+  theme(axis.text.x = element_text(colour = "black", size = 14), 
+        axis.title.x = element_text(size = 18), 
+        axis.title.y = element_text(size = 18),
+        plot.title = element_text(size = 22))
+```
+
+***
+**References:**
+Bjorkman-Chiswell, B. T., Kulinski, M. M., Muscat, R. L., Nguyen, K. A., Norton, B. A., Symonds, M. R., ... & Elgar, M. A. (2004). Web-building spiders attract prey by storing decaying matter. Naturwissenschaften, 91(5), 245-248.
