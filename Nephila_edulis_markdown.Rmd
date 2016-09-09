@@ -1,7 +1,7 @@
 ---
 title: "*Nephila edulis* data analysis"
 author: "Philip Bateman (Curtin University) & Blake C Jones (University of Memphis)"
-date: "September 27, 2015"
+date: "September 8, 2016"
 output: html_document
 ---
 ***
