@@ -1,0 +1,50 @@
+web_height,spider_height,debris_trail_number,debris_trail_length,debris_trail_length_2,debris_trail_length_total,spider_position,start_distance,behaviour_distance,behaviour,first_behaviour,behaviour_dummy_coded,FID,flee_distance,final_location,notes
+180,180,1,8,,8,centre web bottom DT,12,10,align,align,1,0.4,0,centre web bottom DT,
+105,105,1,7,,7,centre web bottom DT,9,2,align,align,1,0.4,0,centre web bottom DT,
+180,170,1,11,,11,centre web bottom DT,11,9,align,align,1,0.4,0,centre web bottom DT,
+120,120,1,8,,8,centre web bottom DT,10,3,align,align,1,0.4,0,centre web bottom DT,
+190,180,1,9.5,,9.5,centre web bottom DT,7,2,align,align,1,0.4,0,centre web bottom DT,very big!
+190,180,1,9,,9,centre web bottom DT,9,2,align,align,1,1.5,20,other part of hub,
+160,155,2,5,2,7,centre web bottom DT,7,2,align,align,1,1.5,70,other part of hub,
+125,125,1,4,,4,centre web bottom DT,10,4,align,align,1,2,15,other part of hub,returned immediately
+190,185,1,12,,12,centre web bottom DT,10,4,align,align,1,2.5,30,other part of hub,
+120,120,2,11,4,15,centre web bottom DT,10,7,align,align,1,5,15,other part of hub,"returned immediately, very big spider"
+100,100,1,9,,9,centre web bottom DT,10,2.5,align,align,1,1.5,30,support thread down,
+190,180,1,8.5,,8.5,centre web bottom DT,11,7,align,align,1,4,70,support thread up,
+130,130,1,4.5,,4.5,centre web top DT,12,4,align,align,1,3,60,support thread up,
+160,160,2,7,3,10,centre web top DT,7,5,align,align,1,2,60,support thread up,
+100,100,0,0,,0,centre web,11,9,flight,flight,0,9,60,other part of hub,
+170,170,0,0,,0,centre web,9,1,flight,flight,0,1,40,other part of hub,
+180,180,1,6,,6,centre web bottom DT,8,2,flight,flight,0,2,10,other part of hub,returned immediately
+125,125,1,11,,11,centre web bottom DT,10,7,flight,flight,0,7,15,other part of hub,returned immediately
+160,160,1,7,,7,centre web bottom DT,6,0.5,flight,flight,0,0.5,10,other part of hub,
+130,130,1,7,,7,centre web bottom DT,9,3,flight,flight,0,3,20,other part of hub,returned immediately
+190,180,1,7,,7,centre web bottom DT,9,3,flight,flight,0,3,15,other part of hub,
+170,165,1,9,,9,centre web bottom DT,11,5,flight,flight,0,5,50,other part of hub,
+160,160,1,8,,8,centre web bottom DT,8,2,flight,flight,0,2,15,other part of hub,
+185,180,2,4,7,11,centre web bottom DT,9,1.5,flight,flight,0,1.5,15,other part of hub,
+180,180,1,14,,14,centre web top DT,9,3,flight,flight,0,3,80,other part of hub,
+135,130,1,5.5,,5.5,centre web top DT,6,1,flight,flight,0,1,40,other part of hub,
+185,180,1,4,,4,centre web top DT,8,2,flight,flight,0,2,80,other part of hub,
+115,115,1,6,,6,centre web top DT,8,2,flight,flight,0,2,50,other part of hub,
+140,140,1,7,,7,centre web top DT,6,2.5,flight,flight,0,2.5,15,other part of hub,returned immediately
+160,160,1,8,,8,centre web top DT,9,5,flight,flight,0,5,30,other part of hub,
+135,130,1,7,,7,centre web top DT,8,3,flight,flight,0,3,25,other part of hub,returned immediately
+140,135,2,14,6,20,centre web top DT ,6,2,flight,flight,0,2,70,other part of hub,
+170,170,1,7,,7,centre web top DT,8,2,flight,flight,0,2,60,other part of hub,
+160,160,1,6,,6,centre web top DT,5,3,flight,flight,0,3,8,other part of hub,small spider
+130,130,1,4,,4,centre web top DT,6,3,flight,flight,0,3,30,other part of hub,small spider
+130,130,0,0,,0,centre web,9,0.5,flight,flight,0,0.5,60,other part of hub,
+160,160,0,0,,0,centre web,7,2,flight,flight,0,2,0,support thread up,
+110,110,1,4,,4,centre web bottom DT,11,1,flight,flight,0,1,80,support thread up,
+175,170,1,5,,5,centre web bottom DT,10,3,flight,flight,0,3,40,support thread up,
+100,100,1,5,,5,centre web bottom DT,10,6,flight,flight,0,6,60,support thread up,
+125,125,1,8,,8,centre web bottom DT,10,4,flight,flight,0,4,30,support thread up,
+160,160,1,4,,4,centre web top DT,8,2,flight,flight,0,2,10,support thread up,
+130,130,1,2,,2,centre web top DT,9,5,flight,flight,0,5,70,support thread up,
+150,150,1,6,,6,centre web top DT,10,2,flight,flight,0,2,60,support thread up,
+150,150,1,7,,7,centre web top DT,10,2,flight,flight,0,2,30,support thread up,
+120,120,2,13,9,22,centre web top DT,8,5,align,align,1,0.4,70,to bottom of short DT,changed to align and FID from 5 to 0.4 because it fleed to DT
+185,185,1,8,,8,centre web bottom DT,10,3,flight,shake,0,2,60,other part of hub,
+120,120,1,1,,1,centre web top DT,12,9,flight,shake,0,11,15,other part of hub,autot one back limb
+110,110,2,2,2,4,centre web top DT,9,7,flight,shake,0,5,20,other part of hub,
