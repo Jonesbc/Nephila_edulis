@@ -1,0 +1,13 @@
+---
+title: "README"
+author: "Blake_C_Jones"
+date: "September 19, 2016"
+output: html_document
+---
+
+***
+***
+### **README**
+***
+
+Included in this repo is a data set and statistical analysis of experimental behavioural observations of *Nephila edulis*. Data was collected by Dr. Bill Bateman of Curtin University and statistical analysis was run by Dr. Blake Jones.
